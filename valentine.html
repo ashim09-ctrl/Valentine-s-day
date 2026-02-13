@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #c44569;
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .heart-icon {
+            font-size: 4em;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message {
+            font-size: 1.3em;
+            color: #333;
+            line-height: 1.8;
+            margin: 30px 0;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .special-text {
+            color: #ff6b9d;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .button-container {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(196, 69, 105, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(196, 69, 105, 0.6);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #c44569;
+            border: 2px solid #c44569;
+        }
+
+        .btn-secondary:hover {
+            background: #c44569;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Floating hearts background */
+        .floating-heart {
+            position: fixed;
+            font-size: 2em;
+            opacity: 0.6;
+            animation: float 6s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #c44569;
+        }
+
+        .modal-title {
+            color: #c44569;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .modal-text {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .gallery-item {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .emoji-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #999;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="emoji-rain" id="emojiRain"></div>
+
+    <div class="container">
+        <h1>
+            Happy Valentine's Day
+            <div class="heart-icon">💕</div>
+        </h1>
+
+        <div class="message">
+            <p>To my <span class="special-text">dearest love</span>,</p>
+            <p style="margin-top: 20px;">
+                Every moment with you is a blessing. Your smile brightens my day, your kindness touches my heart, and your presence makes my world complete.
+            </p>
+            <p style="margin-top: 20px;">
+                Thank you for being my love, my support, and my best friend. On this special day, I want you to know just how much you mean to me.
+            </p>
+            <p style="margin-top: 20px; font-size: 1.4em;">
+                <span class="special-text">Forever Yours 💖</span>
+            </p>
+        </div>
+
+        <div class="button-container">
+            <button class="btn-primary" onclick="openModal('memories')">Our Memories</button>
+            <button class="btn-secondary" onclick="openModal('reasons')">Reasons I Love You</button>
+            <button class="btn-primary" onclick="showRain()">Celebration! 🎉</button>
+        </div>
+
+        <div class="footer">
+            <p>Created with love on Valentine's Day 2026 💕</p>
+        </div>
+    </div>
+
+    <!-- Memory Modal -->
+    <div id="memoriesModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('memories')">&times;</span>
+            <div class="modal-title">Our Beautiful Memories 💞</div>
+            <div class="gallery">
+                <div class="gallery-item">First Day ✨</div>
+                <div class="gallery-item">Our Adventure 🌍</div>
+                <div class="gallery-item">Sweet Moments 🍰</div>
+                <div class="gallery-item">Laughter & Joy 😂</div>
+                <div class="gallery-item">Sunset Together 🌅</div>
+                <div class="gallery-item">Hand in Hand 🤝</div>
+            </div>
+            <p class="modal-text">These are just a few of the countless beautiful moments we've shared. Each one is treasured in my heart forever.</p>
+        </div>
+    </div>
+
+    <!-- Reasons Modal -->
+    <div id="reasonsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('reasons')">&times;</span>
+            <div class="modal-title">Why I Love You 💕</div>
+            <div class="modal-text">
+                <p>✨ Your infectious smile and warm laugh</p>
+                <p>💪 Your strength and determination</p>
+                <p>🎨 Your creativity and unique perspective</p>
+                <p>❤️ Your compassion and kindness</p>
+                <p>🌟 The way you light up my world</p>
+                <p>🏡 How you make every place feel like home</p>
+                <p>🌈 The love and joy you bring to my life</p>
+                <p>Forever grateful for you 💖</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        // Create hearts continuously
+        setInterval(createFloatingHeart, 500);
+
+        // Modal functions
+        function openModal(type) {
+            const modalId = type === 'memories' ? 'memoriesModal' : 'reasonsModal';
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(type) {
+            const modalId = type === 'memories' ? 'memoriesModal' : 'reasonsModal';
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const memoriesModal = document.getElementById('memoriesModal');
+            const reasonsModal = document.getElementById('reasonsModal');
+            if (event.target === memoriesModal) {
+                memoriesModal.style.display = 'none';
+            }
+            if (event.target === reasonsModal) {
+                reasonsModal.style.display = 'none';
+            }
+        }
+
+        // Celebration animation
+        function showRain() {
+            const emojiRain = document.getElementById('emojiRain');
+            for (let i = 0; i < 50; i++) {
+                const emoji = document.createElement('div');
+                emoji.textContent = ['❤️', '💕', '💖', '💝', '💗'][Math.floor(Math.random() * 5)];
+                emoji.style.position = 'fixed';
+                emoji.style.left = Math.random() * 100 + '%';
+                emoji.style.top = '-50px';
+                emoji.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                emoji.style.opacity = Math.random() * 0.5 + 0.5;
+                emoji.style.pointerEvents = 'none';
+                emojiRain.appendChild(emoji);
+
+                let top = -50;
+                const speed = Math.random() * 3 + 2;
+                const interval = setInterval(() => {
+                    top += speed;
+                    emoji.style.top = top + 'px';
+                    if (top > window.innerHeight) {
+                        clearInterval(interval);
+                        emoji.remove();
+                    }
+                }, 20);
+            }
+        }
+
+        // Easter egg: Click the main heart
+        const heart = document.querySelector('.heart-icon');
+        heart.addEventListener('click', () => {
+            showRain();
+            alert('You just made it rain hearts! ❤️');
+        });
+    </script>
+</body>
+</html>
